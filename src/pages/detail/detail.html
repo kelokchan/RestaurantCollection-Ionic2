@@ -1,0 +1,117 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Details</ion-title>
+		<ion-buttons end class="nav-bar-icon">
+			<button icon-only ion-button clear (click)="share(restaurantDetail)">
+        		<ion-icon name="share" aria-label="share"></ion-icon>
+      		</button>
+		</ion-buttons>
+		<ion-buttons end class="nav-bar-icon">
+			<button icon-only ion-button clear *ngIf="resExistsInCollection" (click)="removeFromCollection(restaurantID)">
+        		<ion-icon name="heart" aria-label="add to collection"></ion-icon>
+      		</button>
+			<button icon-only ion-button clear *ngIf="!resExistsInCollection" (click)="addToCollection(restaurantDetail)">
+        		<ion-icon name="heart-outline" aria-label="remove from collection"></ion-icon>
+      		</button>
+			<!--<button icon-only ion-button clear (click)="navigateToRestaurant(restaurantDetail.url)">
+        		<ion-icon name="navigate" aria-label="navigate"></ion-icon>
+      		</button>-->
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="restaurantDetail">
+	<ion-slides pager loop autoplay="4500">
+		<ion-slide *ngFor="let photo of photos">
+			<img src={{photo}}>
+		</ion-slide>
+	</ion-slides>
+
+	<button ion-fab color=primary class="right-fab" (click)="navigateToRestaurant(restaurantDetail)"><ion-icon name="navigate"></ion-icon></button>
+	<!--<button ion-fab color="danger" class="right-fab" *ngIf="resExistsInCollection" (click)="removeFromCollection(restaurantID)"><ion-icon name="heart"></ion-icon></button>-->
+	<!--<button ion-fab color="danger" class="right-fab" *ngIf="!resExistsInCollection" (click)="addToCollection(restaurantDetail)"><ion-icon name="heart-outline"></ion-icon></button>-->
+
+	<div class="padding">
+		<ion-row>
+			<ion-col>
+				<h3 class="name">{{restaurantDetail.name}}</h3>
+			</ion-col>
+		</ion-row>
+		<ion-row *ngIf="restaurantDetail?.opening_hours">
+			<ion-col>
+				<span class="open" *ngIf="restaurantDetail.opening_hours.open_now">Open now</span>
+				<span class="closed" *ngIf="!restaurantDetail.opening_hours.open_now">Closed now</span>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<rating class="rating-bar" *ngIf="restaurantDetail.rating" [(ngModel)]=restaurantDetail.rating readOnly=true></rating>
+				<p class="rating-text" *ngIf="restaurantDetail.rating">{{restaurantDetail.rating}}</p>
+				<p *ngIf="!restaurantDetail.rating">No rating</p>
+			</ion-col>
+		</ion-row>
+
+		<div class="divider"></div>
+		<ion-row>
+			<ion-col width-10>
+				<ion-icon name="pin" color="primary"></ion-icon>
+			</ion-col>
+			<ion-col width-90>
+				<p>{{restaurantDetail.formatted_address}}</p>
+			</ion-col>
+		</ion-row>
+
+
+		<ion-row>
+			<ion-col width-10>
+				<ion-icon name="call" color="primary"></ion-icon>
+			</ion-col>
+			<ion-col width-90>
+				<p *ngIf="restaurantDetail.formatted_phone_number">{{restaurantDetail.formatted_phone_number}}</p>
+				<p *ngIf="!restaurantDetail.formatted_phone_number">-</p>
+			</ion-col>
+		</ion-row>
+
+		<ion-row *ngIf="restaurantDetail?.website">
+			<ion-col width-10>
+				<ion-icon name="globe" color="primary"></ion-icon>
+			</ion-col>
+			<ion-col width-90>
+				<a href="#" (click)="launchUrl(restaurantDetail.website)">
+					<p>{{restaurantDetail.website}}</p>
+				</a>
+			</ion-col>
+		</ion-row>
+
+		<div class="divider"></div>
+
+		<ion-row>
+			<ion-col width-10>
+				<ion-icon name="clock" color="primary"></ion-icon>
+			</ion-col>
+			<ion-col width-90>
+				<p>Opening hours</p>
+			</ion-col>
+		</ion-row>
+
+		<ng-container *ngIf="formattedOpeningHours.length">
+			<ion-row *ngFor="let item of formattedOpeningHours">
+				<ion-col width-25 style="word-wrap: normal">{{item.day}}:</ion-col>
+				<ion-col width-75 text-center>
+					{{item.time}}
+				</ion-col>
+			</ion-row>
+		</ng-container>
+
+		<ion-row *ngIf="!formattedOpeningHours.length">
+			<ion-col width-10></ion-col>
+			<ion-col>No details</ion-col>
+		</ion-row>
+	</div>
+</ion-content>
+
+<ion-content *ngIf="!restaurantDetail">
+	<div class="spinner" *ngIf="!loaded">
+		<ion-spinner color="primary"></ion-spinner>
+	</div>
+</ion-content>

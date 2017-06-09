@@ -1,0 +1,52 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Collection
+		</ion-title>
+		<ion-buttons end>
+			<button icon-only ion-button clear (click)="presentPopover($event)">
+        		<ion-icon name="more" aria-label="more"></ion-icon>
+      		</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content>
+		</ion-refresher-content>
+	</ion-refresher>
+
+	<ion-list>
+		<ion-item-sliding #slidingItem *ngFor="let item of collection">
+			<ion-item (click)="goToDetail(item.place_id)">
+				<ion-thumbnail item-left>
+					<img [src]=item.thumbnailURL>
+				</ion-thumbnail>
+				<h2>{{item.name}}</h2>
+				<h3 ion-text color="grey" class="address">{{item.address}}</h3>
+				<p color="primary" *ngIf="item.distance">
+					<ion-icon name="navigate"></ion-icon> {{ item.distance }} away</p>
+			</ion-item>
+			<ion-item-options side="right">
+				<button ion-button color="primary" (click)="navigateToRestaurant(item, slidingItem)"><ion-icon name="navigate"></ion-icon>Navigate</button>
+				<button ion-button color="danger" (click)="removeFromCollection(item.place_id, slidingItem)"><ion-icon name="trash"></ion-icon>Delete</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+
+	<ion-fab right bottom [ngClass]="{ 'grow' : !scrolledDown, 'shrink' : scrolledDown }">
+		<button ion-fab (click)="goToSearch()">
+			<ion-icon name="search"></ion-icon>
+		</button>
+	</ion-fab>
+
+	<div class="spinner" *ngIf="!loaded">
+		<ion-spinner color="primary"></ion-spinner>
+	</div>
+
+	<div>
+		<h3 class="empty-collection animated fadeIn" *ngIf="isEmptyCollection">No collection</h3>
+	</div>
+
+</ion-content>

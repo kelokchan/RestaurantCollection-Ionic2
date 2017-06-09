@@ -1,0 +1,38 @@
+<!--
+  Generated template for the Search page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-toolbar>
+		<ion-searchbar placeholder="Search for a place" debounce="0" [(ngModel)]="keyword" (ionInput)="filterByKeyword($event)" (search)="searchByKeyword($event)">
+		</ion-searchbar>
+		<ion-buttons end>
+			<button ion-button clear (click)="goBack()">Cancel</button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<button ion-button full clear icon-left *ngIf="!restaurants.length && keyword && loaded" (click)="initSearch(keyword, coordService.lat, coordService.lng)">
+		<ion-icon name="search"></ion-icon>
+		Search for "{{keyword}}"
+	</button>
+
+	<ion-list>
+		<ion-item *ngFor="let restaurant of restaurants" (click)="goToDetail(restaurant.place_id)">
+			<h2>{{restaurant.name}}</h2>
+			<p>{{restaurant.vicinity}}</p>
+		</ion-item>
+	</ion-list>
+
+	<ion-infinite-scroll (ionInfinite)="loadMoreData($event)">
+		<ion-infinite-scroll-content></ion-infinite-scroll-content>
+	</ion-infinite-scroll>
+
+	<div class="spinner" *ngIf="!loaded">
+		<ion-spinner color="primary"></ion-spinner>
+	</div>
+</ion-content>

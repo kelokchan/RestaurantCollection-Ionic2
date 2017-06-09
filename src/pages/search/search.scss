@@ -1,0 +1,25 @@
+page-search {
+    .center {
+        margin-top: 50px;
+        text-align: center !important;
+    }
+
+    .spinner {
+        margin: auto;
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+        height: 35px;
+        text-align: center;
+
+         svg {
+            width: 35px;
+            height: 35px;
+        }
+    }
+
+    ion-searchbar{
+        input {
+            box-shadow: none !important;
+        }
+    }
+}

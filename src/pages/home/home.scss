@@ -1,0 +1,69 @@
+page-home {
+  .shrink {
+    transition:all 0.1s ease;
+    display: flex !important;
+    -webkit-transform: scale(0.0);
+    -ms-transform: scale(0.0);
+    transform: scale(0.0);
+  }
+
+  .grow {
+    transition:all 0.1s ease;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  .spinner {
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    height: 35px;
+    text-align: center;
+
+    svg {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  .empty-collection {
+    margin: auto;
+    position: absolute;
+    text-align: center;
+    top: 40%; left: 0; bottom: 0; right: 0;
+
+    color: grey;
+  }
+
+  ion-thumbnail {
+    position: relative;
+    overflow: hidden;
+    border-radius: 7px;
+
+    img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+      transform: translate(-50%,-50%);
+    }
+  }
+
+  ion-item {
+    h2 {
+      white-space: normal;
+    }
+
+    .address{
+      overflow: inherit;
+      line-height: normal;
+      text-overflow: inherit;
+    }
+  }
+
+}
