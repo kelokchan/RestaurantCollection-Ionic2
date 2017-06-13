@@ -2,11 +2,11 @@ import {AuthProviders, AuthMethods} from 'angularfire2';
 
 // Change this to link to your own Firebase
 export const FirebaseConfig = {
-  apiKey: "AIzaSyCSDBSDzS9NfDCHvb2OPF56OtKs3bPJlyA",
-  authDomain: "restaurantcollection-fe6cf.firebaseapp.com",
-  databaseURL: "https://restaurantcollection-fe6cf.firebaseio.com",
-  projectId: "restaurantcollection-fe6cf",
-  storageBucket: "restaurantcollection-fe6cf.appspot.com"
+  apiKey: xxxxx,
+  authDomain: xxxxx,
+  databaseURL: xxxxx,
+  projectId: xxxxx,
+  storageBucket: xxxxx
 };
 
 export const FirebaseAuthConfig = {
