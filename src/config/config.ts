@@ -15,7 +15,7 @@ export const FirebaseAuthConfig = {
 };
 
 export const GooglePlaceConfig = {
-  apiKey: "AIzaSyASScl5LXa_IIPom5MkpbGdCG-V0QGhjxw",
+  apiKey: "xxxx",
   baseSearchUrl: "https://maps.googleapis.com/maps/api/place/nearbysearch/json",
   baseDetailUrl: "https://maps.googleapis.com/maps/api/place/details/json",
   basePhotoUrl: "https://maps.googleapis.com/maps/api/place/photo",
